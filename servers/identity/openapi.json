@@ -1,0 +1,267 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Identity",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/user": {
+      "post": {
+        "tags": ["user"],
+        "operationId": "register",
+        "summary": "register account",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "user created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "email invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["user"],
+        "operationId": "info",
+        "summary": "info account",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInfo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "email invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth": {
+      "post": {
+        "tags": ["auth"],
+        "operationId": "login",
+        "summary": "login account",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserSummary"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/UserSummary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "jwt token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "email invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["auth"],
+        "operationId": "resign",
+        "summary": "refresh token",
+        "parameters": [
+          {
+            "name": "jwt",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "jwt token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "token invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "first": {
+            "type": "string",
+            "example": "John"
+          },
+          "last": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "phone": {
+            "type": "string",
+            "example": "548-807-0760"
+          },
+          "email": {
+            "type": "string",
+            "example": "john.doe@email.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "mysecretpass"
+          },
+          "admin": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "UserInfo": {
+        "type": "object",
+        "properties": {
+          "first": {
+            "type": "string",
+            "example": "John"
+          },
+          "last": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "phone": {
+            "type": "string",
+            "example": "548-807-0760"
+          },
+          "email": {
+            "type": "string",
+            "example": "john.doe@email.com"
+          },
+          "admin": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "UserSummary": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "john.doe@email.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "mysecretpass"
+          }
+        }
+      },
+      "Token": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoic3RhbmZvcmQuc2NodXBwZTE5QGhvdG1haWwuY29tIiwiaWF0IjoxNjAxMzE5NzI2LCJleHAiOjE2MDE0MDYxMjZ9.4inEcokyuOSmj-YGtoX4jim4HpVWGULpiVk7Ia5bdwQ"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "example": "field_invalid"
+              },
+              "message": {
+                "type": "string",
+                "example": "field invalid"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
