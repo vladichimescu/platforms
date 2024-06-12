@@ -1,0 +1,8 @@
+{
+  "time": "Ora este {t, time, short}.",
+  "date": "Data este {d, date, long}.",
+  "cartStatus": "Cos: {items, plural, =0 {niciun produs} one {# produs} other {# produse}}.",
+  "responseStatus": "{gender, select, male {El va} female {Ea va} other {Ei vor}} raspunde imediat.",
+  "gradeStatus": "gradul {grade, selectordinal, one {intai} two {secund} other {al #lea}}",
+  "discount": "pret: <small><strike>{fullPrice}</strike></small> <b>{price}</b> / reducere <small><b><red>{discount} ({pct})</red></b></small> "
+}

@@ -1,0 +1,9 @@
+{
+  "noMagic": "no magical translation",
+  "time": "The time is {t, time, short}.",
+  "date": "The date is {d, date, long}.",
+  "cartStatus": "Cart: {items, plural, =0 {no items} one {# item} other {# items}}.",
+  "responseStatus": "{gender, select, male {He} female {She} other {They}} will respond shortly.",
+  "gradeStatus": "{grade, selectordinal, one {#st} two {#nd} few {#rd} other {#th}} grade",
+  "discount": "price: <small><strike>{fullPrice}</strike></small> <b>{price}</b> / <small><b><red>{discount} ({pct})</red></b></small> discount"
+}

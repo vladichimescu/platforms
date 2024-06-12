@@ -1,0 +1,5 @@
+.navs a:not(:first-of-type)::before {
+  content: "|";
+  padding: 8px;
+  color: initial;
+}
