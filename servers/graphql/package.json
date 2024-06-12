@@ -1,0 +1,24 @@
+{
+  "name": "@platforms/graphql",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "dotenv -e ../../.env -- node --experimental-json-modules index.js",
+    "debug": "dotenv -e ../../.env -- node --inspect index.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "graphql": "^16.8.1",
+    "graphql-http": "^1.22.1",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^7.4.2"
+  },
+  "volta": {
+    "extends": "../../package.json"
+  }
+}
