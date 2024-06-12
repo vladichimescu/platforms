@@ -1,0 +1,8 @@
+{
+  "name": "@platforms/apis",
+  "version": "1.0.0",
+  "private": true,
+  "volta": {
+    "extends": "../../package.json"
+  }
+}
