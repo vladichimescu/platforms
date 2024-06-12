@@ -4,6 +4,12 @@ import ReactDOM from "react-dom/client"
 import { BrowserRouter } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 
+import {
+  AuthProvider,
+  ErrorBoundary,
+  Loading,
+} from "@platforms/react-components"
+
 import App from "./app"
 import "./index.css"
 
@@ -30,16 +36,20 @@ axios.interceptors.response.use(
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
   <React.StrictMode>
-    <Suspense fallback={<div>Loading</div>}>
-      <BrowserRouter>
-        <ToastContainer
-          autoClose={3500}
-          closeOnClick={true}
-          position="top-center"
-          hideProgressBar
-        />
-        <App />
-      </BrowserRouter>
-    </Suspense>
+    <ErrorBoundary>
+      <Suspense fallback={<Loading />}>
+        <BrowserRouter>
+          <AuthProvider>
+            <ToastContainer
+              autoClose={3500}
+              closeOnClick={true}
+              position="top-center"
+              hideProgressBar
+            />
+            <App />
+          </AuthProvider>
+        </BrowserRouter>
+      </Suspense>
+    </ErrorBoundary>
   </React.StrictMode>
 )
